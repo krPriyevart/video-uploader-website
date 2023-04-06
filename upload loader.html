@@ -1,0 +1,93 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Untitled Document</title>
+	<style>
+		body{
+			margin:0;
+			padding:0;
+			box-sizing: border-box;
+			background:black;
+		}
+		#box{
+			
+			width:100%;
+			height: 100vh;
+		    background-attachment: fixed;
+			background:linear-gradient(135deg, blue ,black);
+		}
+		#box h1,img{
+			color:white;
+			padding:0;
+			margin:0 auto;
+			font-size: 80px;
+			font-family: verdana;
+			position: fixed;
+            top: 40%;
+            left: 50%;
+			transform: translate(-50%,-50%);
+		}
+		#box img{
+			top:54%;
+			
+		}
+		#video{
+			position: fixed;
+			top: 50%;
+            left: 50%;
+			transform: translate(-50%,-50%);
+			visibility:hidden;
+		}
+	
+		#uploadimg{
+			cursor: pointer;
+		}
+	</style>
+</head>
+
+<body>
+	<div id="box">
+	<h1 id="btext">UPLOAD VIDEO</h1>
+		<!--
+		<input type="file" accept="video/*" id="input" onChange="demo(event)" />
+			-->
+		<img src="image/upload1.gif" id="uploadimg" onclick="uploadimg()" />
+	</div>
+	<video controls="controls" width="90%" id="video"></video>
+	<script>
+	
+		   
+		 function uploadimg(){
+		 	var inputc = document.createElement("input");
+			 inputc.type="file";
+			 inputc.accept="video/*";
+			 inputc.id="input";
+			 inputc.click();
+			 inputc.onchange = demo;
+			 
+		}
+	
+		
+		
+	var demo = function(x){
+		var input = x.target;
+		var reader = new FileReader();
+		reader.onload = function(){
+			var filename = reader.result;
+			var video = document.getElementById("video");
+			video.src = filename;
+			document.getElementById("btext").innerHTML = "PLEASE WAIT..."
+			
+			video.onloadeddata = function(){
+				document.getElementById("box").style.visibility = "hidden";	document.getElementById("video").style.visibility = "visible";
+			}
+		}
+		reader.readAsDataURL(input.files[0]);
+		
+	}
+	
+	
+	</script>
+</body>
+</html>
